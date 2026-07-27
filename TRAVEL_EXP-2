@@ -1,0 +1,82 @@
+#TRAVEL MANAGEMENT
+
+import java.util.ArrayList;
+import java.util.Scanner;
+public class JavaApplication6 {
+    public static void main(String[] args) {
+        ArrayList<String>cityname=new ArrayList<>();
+        Scanner sc=new Scanner(System.in);
+        int choice;
+        System.out.println("----CITY MANAGEMENT----");
+        System.out.println("1.APPEND CITY :");
+        System.out.println("2.INSERT CITY :");
+        System.out.println("3.SEARCH CITY :");
+        System.out.println("4.DISPALY CITIES STARTING WITH FIRST LETTER :");
+        System.out.println("5.DISPALY ALL THE CITIES :");
+        System.out.println("6.EXIT :");
+        do{
+            System.out.print("ENTER YOUR CHOICE : ");
+            choice=sc.nextInt();
+            sc.nextLine();
+            switch(choice){
+                case 1:
+                    System.out.print("ENTER CITY NAME TO APPEND : ");
+                    String city=sc.nextLine();
+                    cityname.add(city);
+                    System.out.println(city + " added successfully");
+                    break;
+                case 2:
+                    if(cityname.isEmpty()){
+                        System.out.println("LIST IS EMPTY");
+                    }else{
+                        System.out.print("ENTER INDEX : ");
+                        int index=sc.nextInt();
+                        sc.nextLine();
+                        if(index>=0&&index<=cityname.size()){
+                            System.out.print("ENTER CITY : ");
+                            String newcity=sc.nextLine();
+                            cityname.add(index,newcity);
+                            System.out.println(newcity+" is inserted");
+                        }else{
+                            System.out.println("INVALID INDEX");
+                        }
+                    }
+                    break;
+                case 3:
+                    System.out.print("Enter city to search: ");
+                    String searchcity = sc.nextLine();
+                    if (cityname.contains(searchcity))
+                        System.out.println(searchcity + " is found.");
+                    else
+                        System.out.println(searchcity + " is not found.");
+                    break;
+                case 4:
+                    System.out.print("Enter starting letter: ");
+                    char letter = sc.next().charAt(0);
+                    System.out.println("Cities starting with '" + letter + "':");
+                    boolean found = false;
+                    for (String c : cityname) {
+                        if (c.toLowerCase().startsWith(String.valueOf(letter).toLowerCase())) {
+                            System.out.println(c);
+                            found = true;
+                        }
+                    }
+                    if (!found)
+                        System.out.println("No cities found.");
+                    break;
+                case 5:
+                    if (cityname.isEmpty())
+                        System.out.println("No cities available.");
+                    else
+                        System.out.println("All Cities: " + cityname);
+                    break;
+                case 6:
+                    System.out.println("EXITING...!");
+                    break;
+                default:
+                    System.out.println("INVALID CHOICE");
+            }
+        }while(choice!=6);
+        sc.close();
+    }
+}
